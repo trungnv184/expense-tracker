@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Summary · October 2026 — Ledger</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="expenses.html">Ledger<small>expenses</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="expenses.html">Expenses</a>
+    <a href="summary.html" aria-current="page">Summary</a>
+    <a href="budgets.html">Budgets</a>
+    <a href="recurring.html">Recurring</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <a class="btn primary small add" href="add-expense.html">+ Add expense</a>
+</header>
+
+<main>
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Monthly summary</div>
+      <div class="month-nav">
+        <a href="summary-empty.html?m=September" aria-label="Previous month (September 2026)">‹</a>
+        <h1>October 2026</h1>
+        <a href="summary-empty.html" aria-label="Next month (November 2026)">›</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2 even">
+    <section class="card card-pad" aria-labelledby="spent-h" data-req="REQ-006">
+      <div class="eyebrow" id="spent-h">Total spent</div>
+      <div class="big-total num" style="margin:6px 0 24px" data-req="REQ-019">$1,261.20</div>
+
+      <div class="donut-wrap" data-req="REQ-007">
+        <div class="donut" role="img" aria-label="Share of October spending: Living cost 44.8%, Education 29.3%, Food 16.0%, Sport 5.9%, Charity 4.0%"></div>
+        <ul class="legend" data-req="REQ-006 REQ-002">
+          <li><a class="cat food" data-icon="🍜" href="expenses.html?cat=food">Food</a><span class="num">$202.00</span><span class="pct num">16%</span></li>
+          <li><a class="cat education" data-icon="📚" href="expenses.html?cat=education">Education</a><span class="num">$370.00</span><span class="pct num">29%</span></li>
+          <li><a class="cat charity" data-icon="🤝" href="expenses.html?cat=charity">Charity</a><span class="num">$50.00</span><span class="pct num">4%</span></li>
+          <li><a class="cat sport" data-icon="🏸" href="expenses.html?cat=sport">Sport</a><span class="num">$75.00</span><span class="pct num">6%</span></li>
+          <li><a class="cat living" data-icon="🏠" href="expenses.html?cat=living">Living cost</a><span class="num">$564.20</span><span class="pct num">45%</span></li>
+        </ul>
+      </div>
+      <p class="muted" style="font-size:13px;margin:20px 0 0">All five categories are listed, including any at $0.00. Tap a category to see its expenses.</p>
+    </section>
+
+    <section class="card card-pad" aria-labelledby="budget-h" data-req="REQ-009">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2 id="budget-h">Budgets</h2>
+        <a href="budgets.html" class="btn small">Edit budgets</a>
+      </div>
+
+      <a class="budget" href="expenses.html?cat=food">
+        <div class="top"><span class="cat food" data-icon="🍜">Food</span><span class="status ok">$98.00 left</span></div>
+        <div class="bar" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" aria-label="Food budget used"><i style="width:67%"></i></div>
+        <div class="figs"><span class="num">$202.00 of $300.00</span><span class="num">67%</span></div>
+      </a>
+      <a class="budget over" href="expenses.html?cat=education">
+        <div class="top"><span class="cat education" data-icon="📚">Education</span><span class="status over">$20.00 over</span></div>
+        <div class="bar" role="progressbar" aria-valuenow="106" aria-valuemin="0" aria-valuemax="100" aria-label="Education budget used"><i style="width:100%"></i></div>
+        <div class="figs"><span class="num">$370.00 of $350.00</span><span class="num">106%</span></div>
+      </a>
+      <a class="budget warn" href="expenses.html?cat=charity">
+        <div class="top"><span class="cat charity" data-icon="🤝">Charity</span><span class="status warn">$10.00 left</span></div>
+        <div class="bar" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" aria-label="Charity budget used"><i style="width:83%"></i></div>
+        <div class="figs"><span class="num">$50.00 of $60.00</span><span class="num">83% · nearly there</span></div>
+      </a>
+      <div class="budget">
+        <div class="top"><a class="cat sport" data-icon="🏸" href="expenses.html?cat=sport">Sport</a><span class="status none">No budget</span></div>
+        <div class="figs"><span class="num">$75.00 spent</span><a href="budgets.html">Set a budget</a></div>
+      </div>
+      <a class="budget" href="expenses.html?cat=living">
+        <div class="top"><span class="cat living" data-icon="🏠">Living cost</span><span class="status ok">$235.80 left</span></div>
+        <div class="bar" role="progressbar" aria-valuenow="71" aria-valuemin="0" aria-valuemax="100" aria-label="Living cost budget used"><i style="width:71%"></i></div>
+        <div class="figs"><span class="num">$564.20 of $800.00</span><span class="num">71%</span></div>
+      </a>
+      <p class="muted" style="font-size:13px;margin:8px 0 0">States: normal &lt; 80% · <b style="color:var(--warn)">warning</b> 80–100% · <b style="color:var(--danger)">over</b> &gt; 100%. Status is also written in words, not shown by colour alone.</p>
+    </section>
+  </div>
+</main>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="expenses.html"><span>☰</span>Expenses</a>
+  <a href="summary.html" aria-current="page"><span>◔</span>Summary</a>
+  <a href="budgets.html"><span>◎</span>Budgets</a>
+  <a href="recurring.html"><span>↻</span>Recurring</a>
+  <a href="settings.html"><span>⚙</span>Settings</a>
+</nav>
+
+<details class="reqs">
+  <summary>Requirements on this screen</summary>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('show-reqs',this.checked)"> Highlight on page</label>
+  <ul>
+    <li><code>REQ-006</code> Month total and per-category totals for all five categories (zeros included).</li>
+    <li><code>REQ-007</code> Donut chart of each category’s share, labelled with category and amount in the legend.</li>
+    <li><code>REQ-009</code> Per-category budget: spent, left/over, progress bar; normal / warning (≥ 80%) / over (&gt; 100%); “No budget” when unset.</li>
+    <li><code>REQ-019</code> Total equals the sum of the month’s listed expenses.</li>
+    <li><code>REQ-017</code> Two columns on desktop, stacked on mobile.</li>
+  </ul>
+</details>
+</body>
+</html>

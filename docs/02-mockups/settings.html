@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings — Ledger</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="expenses.html">Ledger<small>expenses</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="expenses.html">Expenses</a>
+    <a href="summary.html">Summary</a>
+    <a href="budgets.html">Budgets</a>
+    <a href="recurring.html">Recurring</a>
+    <a href="settings.html" aria-current="page">Settings</a>
+  </nav>
+  <a class="btn primary small add" href="add-expense.html">+ Add expense</a>
+</header>
+
+<main style="max-width:640px;display:grid;gap:24px">
+  <div class="page-head" style="margin:0"><div><div class="eyebrow">Preferences &amp; data</div><h1>Settings</h1></div></div>
+
+  <section class="card card-pad" aria-labelledby="cur-h" data-req="REQ-013">
+    <h2 id="cur-h">Currency</h2>
+    <p class="muted" style="margin:4px 0 16px">Used to display every amount. Changing it doesn’t convert or alter stored values.</p>
+    <div class="field">
+      <label for="currency">Currency</label>
+      <select id="currency" onchange="preview(this.value)">
+        <option value="USD" selected>USD — US dollar ($)</option>
+        <option value="VND">VND — Vietnamese đồng (₫)</option>
+        <option value="EUR">EUR — Euro (€)</option>
+        <option value="GBP">GBP — British pound (£)</option>
+        <option value="JPY">JPY — Japanese yen (¥)</option>
+      </select>
+    </div>
+    <div class="notice">Preview: <b class="num" id="pv">$12.50 · $1,261.20</b></div>
+  </section>
+
+  <section class="card card-pad" aria-labelledby="exp-h" data-req="REQ-012">
+    <h2 id="exp-h">Export</h2>
+    <p class="muted" style="margin:4px 0 16px">Download every expense as a CSV file you can open in Excel, Numbers or Google Sheets. Also your backup.</p>
+    <button class="btn primary" onclick="exported()">⤓ Export CSV</button>
+    <span class="muted" style="margin-left:8px;font-size:13px">expenses-2026-10-28.csv · 247 expenses</span>
+    <details style="margin-top:16px">
+      <summary style="cursor:pointer;font-weight:600;font-size:14px">What’s in the file</summary>
+      <pre class="csv" style="margin-top:8px">date,category,amount,note,recurring
+2026-08-01,Living cost,500.00,Rent,true
+2026-09-05,Education,250.00,Tuition — English class,true
+2026-10-18,Food,23.40,"Lunch, ""big"" one",false
+2026-10-27,Food,12.50,Lunch with team,false</pre>
+    </details>
+  </section>
+
+  <section class="card card-pad" aria-labelledby="data-h" data-req="REQ-014 REQ-016">
+    <h2 id="data-h">Your data</h2>
+    <ul style="margin:8px 0 0;padding-left:20px;color:var(--ink-2)">
+      <li>Stored only in this browser on this device. No account, nothing sent to a server.</li>
+      <li>Works offline once loaded.</li>
+      <li>Clearing your browser’s site data deletes it. Export CSV regularly as a backup.</li>
+    </ul>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status">Downloaded expenses-2026-10-28.csv</div>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="expenses.html"><span>☰</span>Expenses</a>
+  <a href="summary.html"><span>◔</span>Summary</a>
+  <a href="budgets.html"><span>◎</span>Budgets</a>
+  <a href="recurring.html"><span>↻</span>Recurring</a>
+  <a href="settings.html" aria-current="page"><span>⚙</span>Settings</a>
+</nav>
+
+<details class="reqs">
+  <summary>Requirements on this screen</summary>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('show-reqs',this.checked)"> Highlight on page</label>
+  <ul>
+    <li><code>REQ-013</code> Pick one currency (default USD); display formatting changes, stored values don’t.</li>
+    <li><code>REQ-012</code> Export all expenses as <code>expenses-YYYY-MM-DD.csv</code> with header <code>date,category,amount,note,recurring</code>, sorted by date, proper quoting.</li>
+    <li><code>REQ-014</code>, <code>REQ-016</code> Local-only storage, offline use, explained to the user.</li>
+  </ul>
+</details>
+<script>
+  // Mockup only.
+  function preview(c) {
+    const f = { USD: '$12.50 · $1,261.20', VND: '50.000 ₫ · 31.530.000 ₫', EUR: '12,50 € · 1.261,20 €', GBP: '£12.50 · £1,261.20', JPY: '¥1,250 · ¥126,120' };
+    document.getElementById('pv').textContent = f[c];
+  }
+  function exported() { const t = document.getElementById('toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
+</script>
+</body>
+</html>

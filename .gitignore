@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+test-results/
+playwright-report/
+.flow/state.json
+.flow/lock
+.flow/log.jsonl
+.flow/*.tmp
+.DS_Store

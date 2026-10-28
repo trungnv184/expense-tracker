@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recurring expenses — Ledger</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .rec { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 16px 20px; border-top: 1px solid var(--rule); }
+  .rec:first-child { border-top: 0; }
+  .rec h3 { font-size: 18px; }
+  .rec .meta { font-size: 13px; color: var(--ink-2); display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .rec .amt { grid-row: 1; grid-column: 2; font: 600 18px var(--mono); text-align: right; }
+  .rec .acts { grid-column: 1 / -1; display: flex; gap: 8px; margin-top: 8px; }
+  .rec.stopped { opacity: .7; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="expenses.html">Ledger<small>expenses</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="expenses.html">Expenses</a>
+    <a href="summary.html">Summary</a>
+    <a href="budgets.html">Budgets</a>
+    <a href="recurring.html" aria-current="page">Recurring</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <a class="btn primary small add" href="add-expense.html">+ Add expense</a>
+</header>
+
+<main style="max-width:720px">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Fixed monthly costs</div>
+      <h1>Recurring</h1>
+      <p class="muted" style="margin:8px 0 0">Added automatically to each month when you open the app. Changes apply to future months only.</p>
+    </div>
+    <a class="btn primary" href="recurring-form.html" data-req="REQ-010">+ New recurring</a>
+  </div>
+
+  <div class="notice" style="margin-bottom:16px" data-req="REQ-010" id="gen-notice">
+    <span aria-hidden="true">↻</span>
+    <span>On opening today, 1 expense was added for October: <b>Tuition — English class</b> ($250.00, 5 Oct). Nothing was duplicated.</span>
+  </div>
+
+  <div class="card" data-req="REQ-011">
+    <div class="rec">
+      <div><h3>Rent</h3>
+        <div class="meta"><span class="cat living" data-icon="🏠">Living cost</span><span>Day 1 of each month</span><span>Since Aug 2026</span></div></div>
+      <div class="amt">$500.00</div>
+      <div class="acts"><a class="btn small" href="recurring-form.html?edit=rent">Edit</a><button class="btn small ghost" style="color:var(--danger)" onclick="ask('Rent')">Stop</button></div>
+    </div>
+    <div class="rec">
+      <div><h3>Tuition — English class</h3>
+        <div class="meta"><span class="cat education" data-icon="📚">Education</span><span>Day 5 of each month</span><span>Since Sep 2026</span></div></div>
+      <div class="amt">$250.00</div>
+      <div class="acts"><a class="btn small" href="recurring-form.html?edit=tuition">Edit</a><button class="btn small ghost" style="color:var(--danger)" onclick="ask('Tuition — English class')">Stop</button></div>
+    </div>
+    <div class="rec">
+      <div><h3>Phone plan</h3>
+        <div class="meta"><span class="cat living" data-icon="🏠">Living cost</span><span>Day 31 → last day in short months</span><span>Since Jan 2026</span></div></div>
+      <div class="amt">$18.00</div>
+      <div class="acts"><a class="btn small" href="recurring-form.html?edit=phone">Edit</a><button class="btn small ghost" style="color:var(--danger)" onclick="ask('Phone plan')">Stop</button></div>
+    </div>
+    <div class="rec stopped">
+      <div><h3>Gym membership</h3>
+        <div class="meta"><span class="cat sport" data-icon="🏸">Sport</span><span class="badge" style="margin:0">Stopped · Jul 2026</span><span>Past expenses kept</span></div></div>
+      <div class="amt">$35.00</div>
+    </div>
+  </div>
+</main>
+
+<dialog id="stop" aria-labelledby="stop-title" data-req="REQ-011">
+  <h2 id="stop-title">Stop “<span id="stop-name">Rent</span>”?</h2>
+  <p class="muted">No new expenses will be added from next month. Expenses already created stay in your history.</p>
+  <div class="actions">
+    <button class="btn" onclick="document.getElementById('stop').close()">Keep it</button>
+    <button class="btn danger" onclick="document.getElementById('stop').close()">Stop recurring</button>
+  </div>
+</dialog>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="expenses.html"><span>☰</span>Expenses</a>
+  <a href="summary.html"><span>◔</span>Summary</a>
+  <a href="budgets.html"><span>◎</span>Budgets</a>
+  <a href="recurring.html" aria-current="page"><span>↻</span>Recurring</a>
+  <a href="settings.html"><span>⚙</span>Settings</a>
+</nav>
+
+<details class="reqs">
+  <summary>Requirements on this screen</summary>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('show-reqs',this.checked)"> Highlight on page</label>
+  <ul>
+    <li><code>REQ-010</code> Create recurring expenses; generated on app open for every due month, no duplicates, day 31 falls back to the month’s last day. Generated rows show “↻ Recurring” in the list.</li>
+    <li><code>REQ-011</code> List, edit (future months only) and stop (with confirmation; past expenses kept).</li>
+  </ul>
+</details>
+<script>
+  function ask(n) { document.getElementById('stop-name').textContent = n; document.getElementById('stop').showModal(); }
+</script>
+</body>
+</html>

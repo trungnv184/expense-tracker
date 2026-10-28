@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recurring expense — Ledger</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="expenses.html">Ledger<small>expenses</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="expenses.html">Expenses</a>
+    <a href="summary.html">Summary</a>
+    <a href="budgets.html">Budgets</a>
+    <a href="recurring.html" aria-current="page">Recurring</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <span></span>
+</header>
+
+<main style="max-width:560px">
+  <div class="page-head">
+    <div>
+      <a href="recurring.html" class="muted" style="text-decoration:none">← Recurring</a>
+      <h1 style="margin-top:8px" id="title">New recurring expense</h1>
+    </div>
+  </div>
+
+  <form class="card card-pad" action="recurring.html" novalidate data-req="REQ-010 REQ-011">
+    <div class="field">
+      <label for="name">Note</label>
+      <input id="name" maxlength="200" value="" placeholder="e.g. Rent">
+    </div>
+    <div class="field">
+      <label for="amount">Amount</label>
+      <div class="amount-input"><span aria-hidden="true">$</span><input id="amount" inputmode="decimal" placeholder="0.00"></div>
+      <span class="error">Enter an amount greater than 0 with at most 2 decimals.</span>
+    </div>
+    <fieldset class="field" style="border:0;padding:0">
+      <legend>Category</legend>
+      <div class="cat-picker" data-req="REQ-002">
+        <label class="food"><input type="radio" name="cat" value="food"><span class="tile"><b>🍜</b>Food</span></label>
+        <label class="education"><input type="radio" name="cat" value="education"><span class="tile"><b>📚</b>Education</span></label>
+        <label class="charity"><input type="radio" name="cat" value="charity"><span class="tile"><b>🤝</b>Charity</span></label>
+        <label class="sport"><input type="radio" name="cat" value="sport"><span class="tile"><b>🏸</b>Sport</span></label>
+        <label class="living"><input type="radio" name="cat" value="living" checked><span class="tile"><b>🏠</b>Living cost</span></label>
+      </div>
+    </fieldset>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="field">
+        <label for="day">Day of month</label>
+        <select id="day">
+          <option>1</option><option>5</option><option>10</option><option>15</option><option>20</option><option>25</option><option>28</option><option>30</option><option>31</option>
+        </select>
+        <span class="hint" id="day-hint">Months shorter than this use their last day.</span>
+      </div>
+      <div class="field">
+        <label for="start">Start month</label>
+        <input id="start" type="month" value="2026-10">
+        <span class="hint" id="start-hint">Can’t change after creation.</span>
+      </div>
+    </div>
+    <div class="notice" id="future-note" hidden>Changes apply from next month. Expenses already created (Aug–Oct) keep their old values.</div>
+
+    <div class="actions">
+      <a class="btn ghost" href="recurring.html">Cancel</a>
+      <button class="btn primary" type="submit" id="save">Create</button>
+    </div>
+  </form>
+</main>
+
+<details class="reqs">
+  <summary>Requirements on this screen</summary>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('show-reqs',this.checked)"> Highlight on page</label>
+  <ul>
+    <li><code>REQ-010</code> Amount, category, note, day of month (1–31, last-day fallback), start month.</li>
+    <li><code>REQ-011</code> Edit mode (open via “Edit” on Recurring): changes apply to future months only.</li>
+  </ul>
+</details>
+<script>
+  // Mockup only: prefill in edit mode.
+  const e = new URLSearchParams(location.search).get('edit');
+  if (e) {
+    const data = { rent: ['Rent', '550.00', 'living', '1', '2026-08'], tuition: ['Tuition — English class', '250.00', 'education', '5', '2026-09'], phone: ['Phone plan', '18.00', 'living', '31', '2026-01'] }[e];
+    document.getElementById('title').textContent = 'Edit recurring expense';
+    document.getElementById('name').value = data[0];
+    document.getElementById('amount').value = data[1];
+    document.querySelector(`input[value=${data[2]}]`).checked = true;
+    document.getElementById('day').value = data[3];
+    document.getElementById('start').value = data[4];
+    document.getElementById('start').disabled = true;
+    document.getElementById('future-note').hidden = false;
+    document.getElementById('save').textContent = 'Save changes';
+  } else {
+    document.getElementById('start-hint').textContent = 'Past months from here are filled in when you save.';
+  }
+</script>
+</body>
+</html>

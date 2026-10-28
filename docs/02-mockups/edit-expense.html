@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edit expense — Ledger</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="expenses.html">Ledger<small>expenses</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="expenses.html" aria-current="page">Expenses</a>
+    <a href="summary.html">Summary</a>
+    <a href="budgets.html">Budgets</a>
+    <a href="recurring.html">Recurring</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <span></span>
+</header>
+
+<main style="max-width:560px">
+  <div class="page-head">
+    <div>
+      <a href="expenses.html" class="muted" style="text-decoration:none">← Back to October</a>
+      <h1 style="margin-top:8px">Edit expense</h1>
+    </div>
+  </div>
+
+  <form class="card card-pad" action="expenses.html" novalidate data-req="REQ-003">
+    <input type="hidden" name="toast" value="updated">
+    <div class="field">
+      <label for="amount">Amount</label>
+      <div class="amount-input"><span aria-hidden="true">$</span><input id="amount" inputmode="decimal" value="12.50"></div>
+      <span class="error">Enter an amount greater than 0 with at most 2 decimals.</span>
+    </div>
+
+    <fieldset class="field" style="border:0;padding:0">
+      <legend>Category</legend>
+      <div class="cat-picker" data-req="REQ-002">
+        <label class="food"><input type="radio" name="cat" checked><span class="tile"><b>🍜</b>Food</span></label>
+        <label class="education"><input type="radio" name="cat"><span class="tile"><b>📚</b>Education</span></label>
+        <label class="charity"><input type="radio" name="cat"><span class="tile"><b>🤝</b>Charity</span></label>
+        <label class="sport"><input type="radio" name="cat"><span class="tile"><b>🏸</b>Sport</span></label>
+        <label class="living"><input type="radio" name="cat"><span class="tile"><b>🏠</b>Living cost</span></label>
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <label for="date">Date</label>
+      <input id="date" type="date" value="2026-10-27">
+    </div>
+
+    <div class="field">
+      <label for="note">Note <span class="muted">(optional)</span></label>
+      <input id="note" maxlength="200" value="Lunch with team">
+    </div>
+
+    <div class="actions" style="justify-content:space-between">
+      <button class="btn ghost" type="button" style="color:var(--danger)" onclick="document.getElementById('confirm').showModal()" data-req="REQ-004">Delete</button>
+      <span style="display:flex;gap:12px">
+        <a class="btn ghost" href="expenses.html">Cancel</a>
+        <button class="btn primary" type="submit">Save changes</button>
+      </span>
+    </div>
+  </form>
+</main>
+
+<dialog id="confirm" aria-labelledby="confirm-title" data-req="REQ-004">
+  <h2 id="confirm-title">Delete this expense?</h2>
+  <p class="muted">$12.50 · Food · 27 Oct — “Lunch with team”. October totals will update. This can’t be undone.</p>
+  <div class="actions">
+    <button class="btn" onclick="document.getElementById('confirm').close()">Cancel</button>
+    <a class="btn danger" href="expenses.html?toast=deleted">Delete</a>
+  </div>
+</dialog>
+
+<details class="reqs">
+  <summary>Requirements on this screen</summary>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('show-reqs',this.checked)"> Highlight on page</label>
+  <ul>
+    <li><code>REQ-003</code> Every field editable; same validation as adding (REQ-001). Saving returns to the list with updated totals.</li>
+    <li><code>REQ-004</code> Delete asks for confirmation; Cancel changes nothing.</li>
+    <li><code>REQ-002</code> Same five-category picker.</li>
+  </ul>
+</details>
+</body>
+</html>

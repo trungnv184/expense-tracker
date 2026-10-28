@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expenses · empty month — Ledger</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="expenses.html">Ledger<small>expenses</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="expenses.html" aria-current="page">Expenses</a>
+    <a href="summary.html">Summary</a>
+    <a href="budgets.html">Budgets</a>
+    <a href="recurring.html">Recurring</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <a class="btn primary small add" href="add-expense.html">+ Add expense</a>
+</header>
+
+<main>
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Expenses</div>
+      <div class="month-nav" data-req="REQ-005">
+        <a href="expenses.html" id="prev" aria-label="Previous month">‹</a>
+        <h1 id="month">November 2026</h1>
+        <a href="expenses.html" id="next" aria-label="Next month">›</a>
+      </div>
+    </div>
+    <div class="month-total">Spent this month <span class="num">$0.00</span></div>
+  </div>
+
+  <div class="card empty" data-req="REQ-005">
+    <div class="glyph" aria-hidden="true">∅</div>
+    <h2>Nothing recorded yet</h2>
+    <p>No expenses for <span id="month-inline">November 2026</span>. Add the first one and it will show up here.</p>
+    <a class="btn primary" href="add-expense.html" data-req="REQ-001">+ Add expense</a>
+  </div>
+</main>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="expenses.html" aria-current="page"><span>☰</span>Expenses</a>
+  <a href="summary.html"><span>◔</span>Summary</a>
+  <a href="budgets.html"><span>◎</span>Budgets</a>
+  <a href="recurring.html"><span>↻</span>Recurring</a>
+  <a href="settings.html"><span>⚙</span>Settings</a>
+</nav>
+
+<details class="reqs">
+  <summary>Requirements on this screen</summary>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('show-reqs',this.checked)"> Highlight on page</label>
+  <ul>
+    <li><code>REQ-005</code> Empty state for a month with no expenses, with an “Add expense” action.</li>
+    <li><code>REQ-001</code> Add expense entry point.</li>
+  </ul>
+</details>
+<script>
+  // Mockup only: reuse this page for any empty month (?m=September).
+  const m = new URLSearchParams(location.search).get('m');
+  if (m) {
+    document.getElementById('month').textContent = m + ' 2026';
+    document.getElementById('month-inline').textContent = m + ' 2026';
+    document.getElementById('prev').href = 'expenses-empty.html?m=August';
+  }
+</script>
+</body>
+</html>

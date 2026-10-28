@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expenses · October 2026 — Ledger</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="expenses.html">Ledger<small>expenses</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="expenses.html" aria-current="page">Expenses</a>
+    <a href="summary.html">Summary</a>
+    <a href="budgets.html">Budgets</a>
+    <a href="recurring.html">Recurring</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <a class="btn primary small add" href="add-expense.html" data-req="REQ-001">+ Add expense</a>
+</header>
+
+<main>
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Expenses</div>
+      <div class="month-nav" data-req="REQ-005">
+        <a href="expenses-empty.html?m=September" aria-label="Previous month (September 2026)" title="Previous month">‹</a>
+        <h1>October 2026</h1>
+        <a href="expenses-empty.html" aria-label="Next month (November 2026)" title="Next month">›</a>
+      </div>
+    </div>
+    <div class="month-total">Spent this month <span class="num" data-req="REQ-013 REQ-019">$1,261.20</span></div>
+  </div>
+
+  <div class="grid-2">
+    <section aria-label="Expense list">
+      <div class="chips" role="group" aria-label="Filter by category" data-req="REQ-005 REQ-002">
+        <button class="chip" aria-pressed="true" data-filter="all">All</button>
+        <button class="chip" aria-pressed="false" data-filter="food">🍜 Food</button>
+        <button class="chip" aria-pressed="false" data-filter="education">📚 Education</button>
+        <button class="chip" aria-pressed="false" data-filter="charity">🤝 Charity</button>
+        <button class="chip" aria-pressed="false" data-filter="sport">🏸 Sport</button>
+        <button class="chip" aria-pressed="false" data-filter="living">🏠 Living cost</button>
+      </div>
+
+      <div class="card" id="list" data-req="REQ-005">
+        <div class="day">Tue 27 Oct</div>
+        <a class="row" data-cat="food" href="edit-expense.html" data-req="REQ-003"><span class="cat food" data-icon="🍜">Food</span><span class="note">Lunch with team</span><span class="amt num">$12.50</span></a>
+        <div class="day">Mon 26 Oct</div>
+        <a class="row" data-cat="sport" href="edit-expense.html"><span class="cat sport" data-icon="🏸">Sport</span><span class="note">Badminton court, 2h</span><span class="amt num">$45.00</span></a>
+        <div class="day">Sun 25 Oct</div>
+        <a class="row" data-cat="charity" href="edit-expense.html"><span class="cat charity" data-icon="🤝">Charity</span><span class="note">Red Cross monthly donation</span><span class="amt num">$50.00</span></a>
+        <div class="day">Sat 24 Oct</div>
+        <a class="row" data-cat="food" href="edit-expense.html"><span class="cat food" data-icon="🍜">Food</span><span class="note">Weekly groceries</span><span class="amt num">$86.30</span></a>
+        <div class="day">Tue 20 Oct</div>
+        <a class="row" data-cat="education" href="edit-expense.html"><span class="cat education" data-icon="📚">Education</span><span class="note">Online course — Data analysis</span><span class="amt num">$120.00</span></a>
+        <div class="day">Sun 18 Oct</div>
+        <a class="row" data-cat="food" href="edit-expense.html"><span class="cat food" data-icon="🍜">Food</span><span class="note">Dinner at Phở 24</span><span class="amt num">$23.40</span></a>
+        <div class="day">Thu 15 Oct</div>
+        <a class="row" data-cat="living" href="edit-expense.html"><span class="cat living" data-icon="🏠">Living cost</span><span class="note">Electricity bill</span><span class="amt num">$64.20</span></a>
+        <div class="day">Mon 12 Oct</div>
+        <a class="row" data-cat="sport" href="edit-expense.html"><span class="cat sport" data-icon="🏸">Sport</span><span class="note">Running shoes repair</span><span class="amt num">$30.00</span></a>
+        <div class="day">Sat 10 Oct</div>
+        <a class="row" data-cat="food" href="edit-expense.html"><span class="cat food" data-icon="🍜">Food</span><span class="note">Weekly groceries</span><span class="amt num">$79.80</span></a>
+        <div class="day">Mon 5 Oct</div>
+        <a class="row" data-cat="education" href="edit-expense.html" data-req="REQ-010"><span class="cat education" data-icon="📚">Education<span class="badge" title="Created by a recurring expense">↻ Recurring</span></span><span class="note">Tuition — English class</span><span class="amt num">$250.00</span></a>
+        <div class="day">Thu 1 Oct</div>
+        <a class="row" data-cat="living" href="edit-expense.html" data-req="REQ-010"><span class="cat living" data-icon="🏠">Living cost<span class="badge" title="Created by a recurring expense">↻ Recurring</span></span><span class="note">Rent</span><span class="amt num">$500.00</span></a>
+      </div>
+      <p class="muted" id="filter-empty" hidden>No expenses in this category for October.</p>
+    </section>
+
+    <!-- Desktop (≥1024px): month at a glance beside the list (REQ-017) -->
+    <aside class="card card-pad" aria-label="Month at a glance" data-req="REQ-017 REQ-009">
+      <div class="eyebrow">At a glance</div>
+      <h2 style="margin:4px 0 12px">Budgets this month</h2>
+      <a class="budget" href="summary.html"><div class="top"><span class="cat food" data-icon="🍜">Food</span><span class="status ok">$98.00 left</span></div><div class="bar"><i style="width:67%"></i></div></a>
+      <a class="budget over" href="summary.html"><div class="top"><span class="cat education" data-icon="📚">Education</span><span class="status over">$20.00 over</span></div><div class="bar"><i style="width:100%"></i></div></a>
+      <a class="budget warn" href="summary.html"><div class="top"><span class="cat charity" data-icon="🤝">Charity</span><span class="status warn">$10.00 left</span></div><div class="bar"><i style="width:83%"></i></div></a>
+      <a class="budget" href="summary.html"><div class="top"><span class="cat living" data-icon="🏠">Living cost</span><span class="status ok">$235.80 left</span></div><div class="bar"><i style="width:71%"></i></div></a>
+      <a class="btn full" href="summary.html" style="margin-top:12px">Open full summary →</a>
+    </aside>
+  </div>
+</main>
+
+<a class="btn primary fab" href="add-expense.html" aria-label="Add expense" data-req="REQ-001">+</a>
+<div class="toast" id="toast" role="status"></div>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="expenses.html" aria-current="page"><span>☰</span>Expenses</a>
+  <a href="summary.html"><span>◔</span>Summary</a>
+  <a href="budgets.html"><span>◎</span>Budgets</a>
+  <a href="recurring.html"><span>↻</span>Recurring</a>
+  <a href="settings.html"><span>⚙</span>Settings</a>
+</nav>
+
+<details class="reqs">
+  <summary>Requirements on this screen</summary>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('show-reqs',this.checked)"> Highlight on page</label>
+  <ul>
+    <li><code>REQ-001</code> “+ Add expense” (top bar on desktop, round button on mobile).</li>
+    <li><code>REQ-002</code> Five fixed categories, same colour + icon + label everywhere.</li>
+    <li><code>REQ-003</code> Tap a row to edit it.</li>
+    <li><code>REQ-005</code> Month list newest first, ‹ › month navigation, one-category filter chips.</li>
+    <li><code>REQ-010</code> Rows created by a recurring expense carry a “↻ Recurring” badge.</li>
+    <li><code>REQ-013</code> Amounts in the chosen currency (USD here).</li>
+    <li><code>REQ-017</code> Desktop shows list and budgets side by side; mobile stacks them.</li>
+  </ul>
+</details>
+
+<script>
+  // Mockup only: category filter and toasts after save/delete.
+  const chips = document.querySelectorAll('.chip');
+  function applyFilter(f) {
+    chips.forEach(c => c.setAttribute('aria-pressed', c.dataset.filter === f));
+    let shown = 0;
+    document.querySelectorAll('#list .row').forEach(r => {
+      const on = f === 'all' || r.dataset.cat === f;
+      r.hidden = !on; shown += on;
+      const day = r.previousElementSibling; if (day.classList.contains('day')) day.hidden = !on;
+    });
+    document.getElementById('filter-empty').hidden = shown > 0;
+  }
+  chips.forEach(c => c.addEventListener('click', () => applyFilter(c.dataset.filter)));
+  const q = new URLSearchParams(location.search);
+  if (q.get('cat')) applyFilter(q.get('cat'));
+  const msg = { saved: 'Expense saved', updated: 'Expense updated', deleted: 'Expense deleted' }[q.get('toast')];
+  if (msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
+</script>
+</body>
+</html>

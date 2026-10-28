@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add expense — Ledger</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="expenses.html">Ledger<small>expenses</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="expenses.html" aria-current="page">Expenses</a>
+    <a href="summary.html">Summary</a>
+    <a href="budgets.html">Budgets</a>
+    <a href="recurring.html">Recurring</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <span></span>
+</header>
+
+<main style="max-width:560px">
+  <div class="page-head">
+    <div>
+      <a href="expenses.html" class="muted" style="text-decoration:none">← Back to October</a>
+      <h1 style="margin-top:8px">New expense</h1>
+    </div>
+  </div>
+
+  <div class="state-switch">Mockup state:
+    <button type="button" onclick="setState('clean')">Clean</button>
+    <button type="button" onclick="setState('invalid')">Validation errors</button>
+  </div>
+
+  <form class="card card-pad" id="form" novalidate action="expenses.html" data-req="REQ-001">
+    <input type="hidden" name="toast" value="saved">
+    <div class="field" id="f-amount">
+      <label for="amount">Amount</label>
+      <div class="amount-input" data-req="REQ-013 REQ-019"><span aria-hidden="true">$</span><input id="amount" inputmode="decimal" placeholder="0.00" value="12.50" autocomplete="off" aria-describedby="amount-err"></div>
+      <span class="error" id="amount-err">Enter an amount greater than 0 with at most 2 decimals.</span>
+    </div>
+
+    <fieldset class="field" id="f-cat" style="border:0;padding:0">
+      <legend>Category</legend>
+      <div class="cat-picker" data-req="REQ-002">
+        <label class="food"><input type="radio" name="cat" value="food" checked><span class="tile"><b>🍜</b>Food</span></label>
+        <label class="education"><input type="radio" name="cat" value="education"><span class="tile"><b>📚</b>Education</span></label>
+        <label class="charity"><input type="radio" name="cat" value="charity"><span class="tile"><b>🤝</b>Charity</span></label>
+        <label class="sport"><input type="radio" name="cat" value="sport"><span class="tile"><b>🏸</b>Sport</span></label>
+        <label class="living"><input type="radio" name="cat" value="living"><span class="tile"><b>🏠</b>Living cost</span></label>
+      </div>
+      <span class="error">Pick a category.</span>
+    </fieldset>
+
+    <div class="field">
+      <label for="date">Date</label>
+      <input id="date" type="date" value="2026-10-28">
+      <span class="hint">Defaults to today.</span>
+    </div>
+
+    <div class="field">
+      <label for="note">Note <span class="muted">(optional)</span></label>
+      <input id="note" maxlength="200" placeholder="e.g. Lunch with team" value="Lunch with team">
+      <span class="hint">Up to 200 characters.</span>
+    </div>
+
+    <div class="actions">
+      <a class="btn ghost" href="expenses.html">Cancel</a>
+      <button class="btn primary" type="submit">Save expense</button>
+    </div>
+  </form>
+</main>
+
+<details class="reqs">
+  <summary>Requirements on this screen</summary>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('show-reqs',this.checked)"> Highlight on page</label>
+  <ul>
+    <li><code>REQ-001</code> Amount (required, &gt; 0, ≤ 2 decimals), category (required), date (defaults to today), note (≤ 200 chars). Invalid input blocks saving with inline errors — switch to “Validation errors”.</li>
+    <li><code>REQ-002</code> Picker shows exactly the five categories in fixed order.</li>
+    <li><code>REQ-013</code> Currency symbol from settings.</li>
+    <li><code>REQ-018</code> Every field has a visible label; picker is keyboard-operable radio buttons.</li>
+  </ul>
+</details>
+<script>
+  // Mockup only: show the invalid state; real validation lives in the app.
+  function setState(s) {
+    const bad = s === 'invalid';
+    document.getElementById('f-amount').classList.toggle('invalid', bad);
+    document.getElementById('f-cat').classList.toggle('invalid', bad);
+    document.getElementById('amount').value = bad ? '-4.555' : '12.50';
+    document.querySelectorAll('input[name=cat]').forEach(r => r.checked = !bad && r.value === 'food');
+  }
+  document.getElementById('form').addEventListener('submit', e => {
+    if (document.getElementById('f-amount').classList.contains('invalid')) e.preventDefault();
+  });
+</script>
+</body>
+</html>

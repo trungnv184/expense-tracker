@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Budgets — Ledger</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .budget-row { display: grid; grid-template-columns: 1fr 150px auto; gap: 12px; align-items: center; padding: 14px 0; border-top: 1px solid var(--rule); }
+  .budget-row:first-of-type { border-top: 0; }
+  .budget-row .field { margin: 0; }
+  .budget-row .amount-input input { font-size: 18px; min-height: 44px; }
+  .budget-row .amount-input span { font-size: 16px; }
+  .budget-row .error { grid-column: 1 / -1; }
+  @media (max-width: 480px) { .budget-row { grid-template-columns: 1fr auto; } .budget-row .field { grid-column: 1 / -1; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="expenses.html">Ledger<small>expenses</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="expenses.html">Expenses</a>
+    <a href="summary.html">Summary</a>
+    <a href="budgets.html" aria-current="page">Budgets</a>
+    <a href="recurring.html">Recurring</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <a class="btn primary small add" href="add-expense.html">+ Add expense</a>
+</header>
+
+<main style="max-width:640px">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Monthly limits</div>
+      <h1>Budgets</h1>
+      <p class="muted" style="margin:8px 0 0">One amount per category. It applies to every month until you change it, and resets on the 1st.</p>
+    </div>
+  </div>
+
+  <div class="state-switch">Mockup state:
+    <button type="button" onclick="setState(false)">Clean</button>
+    <button type="button" onclick="setState(true)">Validation error</button>
+  </div>
+
+  <form class="card card-pad" action="summary.html" novalidate data-req="REQ-008" id="form">
+    <div class="budget-row">
+      <span class="cat food" data-icon="🍜">Food</span>
+      <div class="field"><label class="sr-only" for="b-food">Food monthly budget</label><div class="amount-input"><span aria-hidden="true">$</span><input id="b-food" inputmode="decimal" value="300.00"></div></div>
+      <button type="button" class="btn ghost small" onclick="clearB('b-food')">Clear</button>
+    </div>
+    <div class="budget-row" id="row-edu">
+      <span class="cat education" data-icon="📚">Education</span>
+      <div class="field" id="f-edu"><label class="sr-only" for="b-edu">Education monthly budget</label><div class="amount-input"><span aria-hidden="true">$</span><input id="b-edu" inputmode="decimal" value="350.00" aria-describedby="edu-err"></div></div>
+      <button type="button" class="btn ghost small" onclick="clearB('b-edu')">Clear</button>
+      <span class="error" id="edu-err" style="display:none">Enter an amount greater than 0, or clear the budget.</span>
+    </div>
+    <div class="budget-row">
+      <span class="cat charity" data-icon="🤝">Charity</span>
+      <div class="field"><label class="sr-only" for="b-charity">Charity monthly budget</label><div class="amount-input"><span aria-hidden="true">$</span><input id="b-charity" inputmode="decimal" value="60.00"></div></div>
+      <button type="button" class="btn ghost small" onclick="clearB('b-charity')">Clear</button>
+    </div>
+    <div class="budget-row">
+      <span class="cat sport" data-icon="🏸">Sport</span>
+      <div class="field"><label class="sr-only" for="b-sport">Sport monthly budget</label><div class="amount-input"><span aria-hidden="true">$</span><input id="b-sport" inputmode="decimal" value="" placeholder="No budget"></div></div>
+      <span class="status none">No budget</span>
+    </div>
+    <div class="budget-row">
+      <span class="cat living" data-icon="🏠">Living cost</span>
+      <div class="field"><label class="sr-only" for="b-living">Living cost monthly budget</label><div class="amount-input"><span aria-hidden="true">$</span><input id="b-living" inputmode="decimal" value="800.00"></div></div>
+      <button type="button" class="btn ghost small" onclick="clearB('b-living')">Clear</button>
+    </div>
+
+    <div class="actions">
+      <a class="btn ghost" href="summary.html">Cancel</a>
+      <button class="btn primary" type="submit">Save budgets</button>
+    </div>
+  </form>
+</main>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="expenses.html"><span>☰</span>Expenses</a>
+  <a href="summary.html"><span>◔</span>Summary</a>
+  <a href="budgets.html" aria-current="page"><span>◎</span>Budgets</a>
+  <a href="recurring.html"><span>↻</span>Recurring</a>
+  <a href="settings.html"><span>⚙</span>Settings</a>
+</nav>
+
+<details class="reqs">
+  <summary>Requirements on this screen</summary>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('show-reqs',this.checked)"> Highlight on page</label>
+  <ul>
+    <li><code>REQ-008</code> Set, change or clear a monthly budget per category; applies to current and later months; non-positive or non-numeric values block saving (switch to “Validation error”).</li>
+    <li><code>REQ-002</code> Five fixed categories.</li>
+  </ul>
+</details>
+<script>
+  // Mockup only.
+  function clearB(id) { const i = document.getElementById(id); i.value = ''; i.placeholder = 'No budget'; }
+  function setState(bad) {
+    document.getElementById('f-edu').classList.toggle('invalid', bad);
+    document.getElementById('edu-err').style.display = bad ? 'block' : 'none';
+    document.getElementById('b-edu').value = bad ? '-50' : '350.00';
+  }
+  document.getElementById('form').addEventListener('submit', e => {
+    if (document.getElementById('f-edu').classList.contains('invalid')) e.preventDefault();
+  });
+</script>
+</body>
+</html>

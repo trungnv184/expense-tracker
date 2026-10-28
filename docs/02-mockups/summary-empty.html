@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Summary · empty month — Ledger</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="expenses.html">Ledger<small>expenses</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="expenses.html">Expenses</a>
+    <a href="summary.html" aria-current="page">Summary</a>
+    <a href="budgets.html">Budgets</a>
+    <a href="recurring.html">Recurring</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <a class="btn primary small add" href="add-expense.html">+ Add expense</a>
+</header>
+
+<main>
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Monthly summary</div>
+      <div class="month-nav">
+        <a href="summary.html" id="prev" aria-label="Previous month">‹</a>
+        <h1 id="month">November 2026</h1>
+        <a href="summary.html" id="next" aria-label="Next month">›</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2 even">
+    <section class="card card-pad" data-req="REQ-006 REQ-007">
+      <div class="eyebrow">Total spent</div>
+      <div class="big-total num" style="margin:6px 0 16px">$0.00</div>
+      <div class="empty" style="padding:24px 0">
+        <div class="glyph" aria-hidden="true">◯</div>
+        <p>No spending recorded for this month, so there’s no chart yet.</p>
+        <a class="btn primary" href="add-expense.html">+ Add expense</a>
+      </div>
+      <ul class="legend">
+        <li><span class="cat food" data-icon="🍜">Food</span><span class="num">$0.00</span><span class="pct num">—</span></li>
+        <li><span class="cat education" data-icon="📚">Education</span><span class="num">$0.00</span><span class="pct num">—</span></li>
+        <li><span class="cat charity" data-icon="🤝">Charity</span><span class="num">$0.00</span><span class="pct num">—</span></li>
+        <li><span class="cat sport" data-icon="🏸">Sport</span><span class="num">$0.00</span><span class="pct num">—</span></li>
+        <li><span class="cat living" data-icon="🏠">Living cost</span><span class="num">$0.00</span><span class="pct num">—</span></li>
+      </ul>
+    </section>
+    <section class="card card-pad" data-req="REQ-009">
+      <h2>Budgets</h2>
+      <div class="budget"><div class="top"><span class="cat food" data-icon="🍜">Food</span><span class="status ok">$300.00 left</span></div><div class="bar"><i style="width:0"></i></div></div>
+      <div class="budget"><div class="top"><span class="cat education" data-icon="📚">Education</span><span class="status ok">$350.00 left</span></div><div class="bar"><i style="width:0"></i></div></div>
+      <div class="budget"><div class="top"><span class="cat charity" data-icon="🤝">Charity</span><span class="status ok">$60.00 left</span></div><div class="bar"><i style="width:0"></i></div></div>
+      <div class="budget"><div class="top"><span class="cat sport" data-icon="🏸">Sport</span><span class="status none">No budget</span></div></div>
+      <div class="budget"><div class="top"><span class="cat living" data-icon="🏠">Living cost</span><span class="status ok">$800.00 left</span></div><div class="bar"><i style="width:0"></i></div></div>
+    </section>
+  </div>
+</main>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="expenses.html"><span>☰</span>Expenses</a>
+  <a href="summary.html" aria-current="page"><span>◔</span>Summary</a>
+  <a href="budgets.html"><span>◎</span>Budgets</a>
+  <a href="recurring.html"><span>↻</span>Recurring</a>
+  <a href="settings.html"><span>⚙</span>Settings</a>
+</nav>
+
+<details class="reqs">
+  <summary>Requirements on this screen</summary>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('show-reqs',this.checked)"> Highlight on page</label>
+  <ul>
+    <li><code>REQ-007</code> Chart replaced by an empty-state message when the month has no expenses.</li>
+    <li><code>REQ-006</code> All categories still listed at $0.00.</li>
+    <li><code>REQ-009</code> Budgets apply to every month; full amount left.</li>
+  </ul>
+</details>
+<script>
+  const m = new URLSearchParams(location.search).get('m');
+  if (m) { document.getElementById('month').textContent = m + ' 2026'; document.getElementById('prev').href = 'summary-empty.html?m=August'; }
+</script>
+</body>
+</html>

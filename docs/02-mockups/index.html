@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledger — mockups</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { padding-bottom: 0; }
+  .flows { display: grid; gap: 20px; }
+  @media (min-width: 768px) { .flows { grid-template-columns: 1fr 1fr; } }
+  .flow ol { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 6px; }
+  .flow li a { font-weight: 600; }
+  .flow li span { color: var(--ink-3); font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 6px; border-top: 1px solid var(--rule); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .swatches { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+</style>
+</head>
+<body>
+<header class="topbar"><span class="brand">Ledger<small>mockups</small></span><span class="muted" style="font-size:13px">Draft · 28 Oct 2026</span></header>
+<main>
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Expense tracker · design draft</div>
+      <h1>Every spend, one ledger.</h1>
+      <p class="muted" style="max-width:60ch;margin:12px 0 0">A private web app for tracking Food, Education, Charity, Sport and Living cost, with monthly summaries, budgets, recurring costs and CSV export. These screens are static and clickable. Open any screen and use the “Requirements on this screen” note at the bottom to highlight what each element covers. Try them at phone width too.</p>
+      <div class="swatches">
+        <span class="cat food" data-icon="🍜">Food</span>
+        <span class="cat education" data-icon="📚">Education</span>
+        <span class="cat charity" data-icon="🤝">Charity</span>
+        <span class="cat sport" data-icon="🏸">Sport</span>
+        <span class="cat living" data-icon="🏠">Living cost</span>
+      </div>
+    </div>
+    <a class="btn primary" href="expenses.html">Start the walkthrough →</a>
+  </div>
+
+  <div class="flows">
+    <section class="card card-pad flow">
+      <h2>1 · Record a daily expense</h2>
+      <ol>
+        <li><a href="expenses.html">Expenses: October</a> <span>home, month list, filters</span></li>
+        <li><a href="add-expense.html">Add expense</a> <span>clean + validation-error states</span></li>
+        <li><a href="expenses.html?toast=saved">Back to list</a> <span>“Expense saved” confirmation</span></li>
+        <li><a href="edit-expense.html">Edit / delete expense</a> <span>delete confirmation dialog</span></li>
+        <li><a href="expenses-empty.html">Empty month</a> <span>November, nothing recorded</span></li>
+      </ol>
+    </section>
+    <section class="card card-pad flow">
+      <h2>2 · Review the month</h2>
+      <ol>
+        <li><a href="summary.html">Summary: October</a> <span>totals, chart, budget status</span></li>
+        <li><a href="expenses.html?cat=education">Drill into a category</a> <span>list filtered to Education</span></li>
+        <li><a href="summary-empty.html">Summary: empty month</a> <span>chart empty state</span></li>
+      </ol>
+    </section>
+    <section class="card card-pad flow">
+      <h2>3 · Set up fixed costs and limits</h2>
+      <ol>
+        <li><a href="recurring.html">Recurring expenses</a> <span>list, stop dialog, auto-generation notice</span></li>
+        <li><a href="recurring-form.html">New recurring</a> / <a href="recurring-form.html?edit=rent">Edit “Rent”</a> <span>future-only changes</span></li>
+        <li><a href="budgets.html">Budgets</a> <span>set / clear, validation-error state</span></li>
+      </ol>
+    </section>
+    <section class="card card-pad flow">
+      <h2>4 · Take data out &amp; preferences</h2>
+      <ol>
+        <li><a href="settings.html">Settings</a> <span>currency with live preview, Export CSV, data &amp; privacy</span></li>
+      </ol>
+    </section>
+  </div>
+
+  <section class="card card-pad" style="margin-top:20px">
+    <h2>Screen → requirement map</h2>
+    <p class="muted" style="font-size:13px">Full table with notes in <code>mockup-map.md</code>.</p>
+    <table>
+      <tr><th>Screen</th><th>Requirements</th></tr>
+      <tr><td><a href="expenses.html">expenses.html</a></td><td>REQ-001, 002, 003, 005, 009, 010, 013, 017</td></tr>
+      <tr><td><a href="expenses-empty.html">expenses-empty.html</a></td><td>REQ-001, 005</td></tr>
+      <tr><td><a href="add-expense.html">add-expense.html</a></td><td>REQ-001, 002, 013, 018</td></tr>
+      <tr><td><a href="edit-expense.html">edit-expense.html</a></td><td>REQ-002, 003, 004</td></tr>
+      <tr><td><a href="summary.html">summary.html</a></td><td>REQ-006, 007, 009, 017, 019</td></tr>
+      <tr><td><a href="summary-empty.html">summary-empty.html</a></td><td>REQ-006, 007, 009</td></tr>
+      <tr><td><a href="budgets.html">budgets.html</a></td><td>REQ-002, 008</td></tr>
+      <tr><td><a href="recurring.html">recurring.html</a></td><td>REQ-010, 011</td></tr>
+      <tr><td><a href="recurring-form.html">recurring-form.html</a></td><td>REQ-002, 010, 011</td></tr>
+      <tr><td><a href="settings.html">settings.html</a></td><td>REQ-012, 013, 014, 016</td></tr>
+    </table>
+  </section>
+</main>
+</body>
+</html>
