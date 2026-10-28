@@ -5,6 +5,7 @@ import { formatDayHeading, formatMonth } from '../../domain/dates';
 import { formatAmount } from '../../domain/money';
 import { expensesRepo } from '../../data/expensesRepo';
 import type { Expense } from '../../data/db';
+import { BudgetGlance } from '../components/BudgetGlance';
 import { CategoryBadge } from '../components/CategoryBadge';
 import { EmptyState } from '../components/EmptyState';
 import { MonthNav } from '../components/MonthNav';
@@ -99,7 +100,7 @@ export function ExpensesPage() {
               </ul>
             )}
           </section>
-          <div className="glance-slot" />
+          <BudgetGlance month={month} expenses={expenses} currency={currency} />
         </div>
       )}
     </main>

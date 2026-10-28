@@ -219,7 +219,12 @@ pre.csv { font: 13px/1.6 var(--mono); background: var(--ink); color: #efe8da; pa
 }
 .expense-list, .expense-list ul { list-style: none; margin: 0; padding: 0; }
 .expense-list > li:first-child .day { border-top: 0; }
-@media (min-width: 1024px) {
-  .expenses-layout:has(.glance-slot:empty) { grid-template-columns: 1fr; }
-}
 .grid-2 > * { min-width: 0; }
+.budget-row { display: grid; grid-template-columns: 1fr 150px auto; gap: 12px; align-items: center; padding: 14px 0; border-top: 1px solid var(--rule); }
+.budget-row:first-of-type { border-top: 0; }
+.budget-row .field { margin: 0; }
+.budget-row .amount-input input { font-size: 18px; min-height: 44px; }
+.budget-row .amount-input span { font-size: 16px; }
+@media (max-width: 480px) { .budget-row { grid-template-columns: 1fr auto; } .budget-row .field { grid-column: 1 / -1; grid-row: 2; } }
+.glance { display: none; }
+@media (min-width: 1024px) { .glance { display: block; } }
