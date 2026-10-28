@@ -1,6 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { routes } from '../../App';
+import { formatMonth, monthOf, today } from '../../domain/dates';
 
 function renderAt(path: string) {
   const router = createMemoryRouter(routes, { initialEntries: [path] });
@@ -19,7 +20,7 @@ describe('AppShell', () => {
   });
 
   it.each([
-    ['/', 'Expenses'],
+    ['/', formatMonth(monthOf(today()))],
     ['/summary', 'Summary'],
     ['/budgets', 'Budgets'],
     ['/recurring', 'Recurring'],
