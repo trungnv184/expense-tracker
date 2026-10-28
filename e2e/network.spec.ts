@@ -12,9 +12,11 @@ test('no request leaves the origin or carries user data (REQ-016)', async ({ pag
   await page.getByRole('radio', { name: /Charity/ }).check();
   await page.getByLabel(/Note/).fill('SECRET-NOTE-123');
   await page.getByRole('button', { name: 'Save expense' }).click();
+  await expect(page.getByRole('status')).toHaveText('Expense saved');
   await page.getByRole('link', { name: /SECRET-NOTE-123/ }).click();
   await page.getByLabel('Amount').fill('43');
   await page.getByRole('button', { name: 'Save changes' }).click();
+  await expect(page.getByRole('status')).toHaveText('Expense updated');
   await page.goto('./#/summary');
   await expect(page.getByTestId('summary-total')).toHaveText('$43.00');
   await page.goto('./#/settings');
