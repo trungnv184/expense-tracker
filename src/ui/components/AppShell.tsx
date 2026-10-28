@@ -1,4 +1,5 @@
 import { NavLink, Link, Outlet } from 'react-router-dom';
+import { ToastProvider } from '../hooks/useToast';
 
 const NAV = [
   { to: '/', label: 'Expenses', glyph: '☰', end: true },
@@ -10,7 +11,7 @@ const NAV = [
 
 export function AppShell() {
   return (
-    <>
+    <ToastProvider>
       <header className="topbar">
         <Link className="brand" to="/">
           Ledger<small>expenses</small>
@@ -41,6 +42,6 @@ export function AppShell() {
           </NavLink>
         ))}
       </nav>
-    </>
+    </ToastProvider>
   );
 }
