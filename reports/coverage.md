@@ -1,0 +1,21 @@
+| Requirement | Goals | Status |
+|---|---|---|
+| REQ-001 | M1-G2, M2-G1 | DONE |
+| REQ-002 | M1-G2, M2-G1, M2-G2, M4-G2 | DONE |
+| REQ-003 | M2-G3 | DONE |
+| REQ-004 | M2-G3 | DONE |
+| REQ-005 | M1-G3, M2-G2 | DONE |
+| REQ-006 | M3-G1, M3-G2 | DONE |
+| REQ-007 | M3-G2 | DONE |
+| REQ-008 | M3-G3 | DONE |
+| REQ-009 | M3-G1, M3-G2, M3-G3 | DONE |
+| REQ-010 | M4-G1, M4-G2 | DONE |
+| REQ-011 | M4-G1, M4-G2 | DONE |
+| REQ-012 | M5-G1 | DONE |
+| REQ-013 | M1-G2, M2-G1, M2-G2, M5-G1 | DONE |
+| REQ-014 | M1-G3, M5-G1, M5-G2 | DONE |
+| REQ-015 | M1-G3, M5-G3 | DONE |
+| REQ-016 | M5-G1, M5-G2 | DONE |
+| REQ-017 | M1-G1, M2-G2, M3-G2, M3-G3, M5-G3 | DONE |
+| REQ-018 | M2-G1, M5-G3 | DONE |
+| REQ-019 | M1-G2, M3-G1, M5-G3 | DONE |
