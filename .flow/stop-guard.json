@@ -1,1 +1,1 @@
-{"fingerprint":"M1-G1:done:0|M1-G2:done:0|M1-G3:done:0|M2-G1:done:0|M2-G2:verifying:0|M2-G3:pending:0|M3-G1:pending:0|M3-G2:pending:0|M3-G3:pending:0|M4-G1:pending:0|M4-G2:pending:0|M5-G1:pending:0|M5-G2:pending:0|M5-G3:pending:0","stalls":3,"at":"2026-10-28T15:42:46.794Z"}
+{"fingerprint":"M1-G1:done:0|M1-G2:done:0|M1-G3:done:0|M2-G1:done:0|M2-G2:done:0|M2-G3:verifying:0|M3-G1:pending:0|M3-G2:pending:0|M3-G3:pending:0|M4-G1:pending:0|M4-G2:pending:0|M5-G1:pending:0|M5-G2:pending:0|M5-G3:pending:0","stalls":1,"at":"2026-10-28T15:45:48.345Z"}
