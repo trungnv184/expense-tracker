@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-const ROUTES: [string, string][] = [
-  ['#/', 'Expenses'],
+const ROUTES: [string, string | RegExp][] = [
+  ['#/', /^[A-Z][a-z]+ \d{4}$/],
   ['#/expenses/new', 'New expense'],
   ['#/summary', 'Summary'],
   ['#/budgets', 'Budgets'],
