@@ -228,3 +228,13 @@ pre.csv { font: 13px/1.6 var(--mono); background: var(--ink); color: #efe8da; pa
 @media (max-width: 480px) { .budget-row { grid-template-columns: 1fr auto; } .budget-row .field { grid-column: 1 / -1; grid-row: 2; } }
 .glance { display: none; }
 @media (min-width: 1024px) { .glance { display: block; } }
+.rec-list { list-style: none; margin: 0; padding: 0; }
+.rec { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 16px 20px; border-top: 1px solid var(--rule); }
+.rec:first-child { border-top: 0; }
+.rec h3 { font-size: 18px; }
+.rec .meta { font-size: 13px; color: var(--ink-2); display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.rec .amt { grid-row: 1; grid-column: 2; font: 600 18px var(--mono); text-align: right; }
+.rec .acts { grid-column: 1 / -1; display: flex; gap: 8px; margin-top: 8px; }
+.rec.stopped { opacity: .75; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 400px) { .two-col { grid-template-columns: 1fr; } }
