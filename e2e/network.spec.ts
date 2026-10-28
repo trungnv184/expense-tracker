@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('no request leaves the origin or carries user data (REQ-016)', async ({ page, baseURL }) => {
   const origin = new URL(baseURL!).origin;
   const requests: { url: string; method: string; body: string | null }[] = [];
-  page.on('request', (r) => requests.push({ url: r.url(), method: r.method(), body: r.postData() }));
+  page.context().on('request', (r) => requests.push({ url: r.url(), method: r.method(), body: r.postData() }));
 
   await page.clock.setFixedTime(new Date(2026, 9, 28, 12, 0));
   await page.goto('./#/');
