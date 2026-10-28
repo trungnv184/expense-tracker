@@ -51,7 +51,7 @@ test.describe('Monthly expense list (REQ-005)', () => {
     await expect(page).toHaveURL(/cat=education/);
     expect(await notes(page)).toEqual(['Online course', 'Tuition']);
     await page.getByRole('button', { name: 'All', exact: true }).click();
-    expect(await notes(page)).toHaveLength(4);
+    await expect(page.locator('.expense-list .note')).toHaveCount(4);
   });
 
   test('?cat= deep link applies the filter', async ({ page }) => {
