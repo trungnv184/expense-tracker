@@ -50,6 +50,10 @@ export const expensesRepo = {
     return guard(async () => (await db.expenses.where('month').equals(month).toArray()).sort(byDateDesc));
   },
 
+  count(): Promise<number> {
+    return guard(() => db.expenses.count());
+  },
+
   all(): Promise<Expense[]> {
     return guard(() => db.expenses.orderBy('date').toArray());
   },
