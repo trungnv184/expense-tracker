@@ -1,4 +1,4 @@
-node_modules/
+node_modules
 dist/
 coverage/
 test-results/
@@ -8,3 +8,4 @@ playwright-report/
 .flow/log.jsonl
 .flow/*.tmp
 .DS_Store
+.flow/stop-guard.json
