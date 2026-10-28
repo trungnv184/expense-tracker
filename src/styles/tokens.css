@@ -1,0 +1,38 @@
+/* Design tokens, ported from docs/02-mockups/styles.css */
+:root {
+  /* surfaces */
+  --paper: #f6f1e7;
+  --paper-2: #efe8da;
+  --card: #fffdf8;
+  --rule: #ddd3c0;
+  --ink: #1f1b16;
+  --ink-2: #5a5247;
+  --ink-3: #6f665a;
+
+  /* accents */
+  --accent: #1f3a5f;
+  --accent-ink: #ffffff;
+  --danger: #a3261f;
+  --danger-bg: #fbe9e7;
+  --warn: #8a5a00;
+  --warn-bg: #fdf1d8;
+  --ok: #2f6b3a;
+  --ok-bg: #e5f2e3;
+
+  /* categories (REQ-002): text-safe tones, AA on --card */
+  --c-food: #b5462b;
+  --c-education: #3d4f9f;
+  --c-charity: #9a2f6b;
+  --c-sport: #2f7a4b;
+  --c-living: #8a6410;
+
+  /* type */
+  --display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --body: -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* rhythm */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+  --radius: 10px;
+  --shadow: 0 1px 0 rgba(31, 27, 22, .06), 0 6px 20px -12px rgba(31, 27, 22, .25);
+}
