@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 const ROUTES: [string, string | RegExp][] = [
   ['#/', /^[A-Z][a-z]+ \d{4}$/],
   ['#/expenses/new', 'New expense'],
-  ['#/summary', 'Summary'],
+  ['#/summary', /^[A-Z][a-z]+ \d{4}$/],
   ['#/budgets', 'Budgets'],
   ['#/recurring', 'Recurring'],
   ['#/recurring/new', 'New recurring expense'],

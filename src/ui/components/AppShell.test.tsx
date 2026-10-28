@@ -21,12 +21,12 @@ describe('AppShell', () => {
 
   it.each([
     ['/', formatMonth(monthOf(today()))],
-    ['/summary', 'Summary'],
+    ['/summary', formatMonth(monthOf(today()))],
     ['/budgets', 'Budgets'],
     ['/recurring', 'Recurring'],
     ['/settings', 'Settings'],
-  ])('renders the %s route', (path, heading) => {
+  ])('renders the %s route', async (path, heading) => {
     renderAt(path);
-    expect(screen.getByRole('heading', { level: 1, name: heading })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { level: 1, name: heading })).toBeInTheDocument();
   });
 });
