@@ -8,9 +8,11 @@ describe('summarizeMonth (REQ-006)', () => {
       { category: 'food', amountMinor: 500 },
       { category: 'sport', amountMinor: 2000 },
     ]);
-    expect(s).toEqual({
-      totalMinor: 3500,
-      byCategory: { food: 1500, education: 0, charity: 0, sport: 2000, living: 0 },
+    expect(s.totalMinor).toBe(3500);
+    expect(s.byCategory).toEqual({
+      ...Object.fromEntries(CATEGORY_IDS.map((id) => [id, 0])),
+      food: 1500,
+      sport: 2000,
     });
   });
 
@@ -24,7 +26,7 @@ describe('summarizeMonth (REQ-006)', () => {
     const rand = () => ((seed = (seed * 1103515245 + 12345) % 2 ** 31) / 2 ** 31);
     for (let run = 0; run < 200; run++) {
       const rows = Array.from({ length: Math.floor(rand() * 60) }, () => ({
-        category: CATEGORY_IDS[Math.floor(rand() * 5)] as CategoryId,
+        category: CATEGORY_IDS[Math.floor(rand() * CATEGORY_IDS.length)] as CategoryId,
         amountMinor: 1 + Math.floor(rand() * 1_000_000),
       }));
       const s = summarizeMonth(rows);

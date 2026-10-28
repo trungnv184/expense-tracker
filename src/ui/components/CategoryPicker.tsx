@@ -8,7 +8,7 @@ interface Props {
   legend?: string;
 }
 
-/** Radio group of the five fixed categories (REQ-002), keyboard operable (REQ-018). */
+/** Radio group of the fixed categories (REQ-002), keyboard operable (REQ-018). */
 export function CategoryPicker({ name, value, onChange, error, legend = 'Category' }: Props) {
   const errId = `${name}-err`;
   return (

@@ -5,6 +5,7 @@ import { routes } from '../../App';
 import { db } from '../../data/db';
 import { expensesRepo } from '../../data/expensesRepo';
 import { StorageError } from '../../data/errors';
+import { CATEGORY_IDS } from '../../domain/categories';
 import { today } from '../../domain/dates';
 
 function renderForm() {
@@ -61,15 +62,10 @@ describe('Add expense form (REQ-001)', () => {
     expect(await expensesRepo.all()).toHaveLength(0);
   });
 
-  it('offers exactly the five categories in order', () => {
+  it('offers every category in order', () => {
     renderForm();
-    expect(screen.getAllByRole('radio').map((r) => r.getAttribute('value'))).toEqual([
-      'food',
-      'education',
-      'charity',
-      'sport',
-      'living',
-    ]);
+    expect(screen.getAllByRole('radio').map((r) => r.getAttribute('value'))).toEqual([...CATEGORY_IDS]);
+    expect(screen.getByRole('radio', { name: /Grab fee/ })).toBeInTheDocument();
   });
 
   it('limits the note to 200 characters', () => {
@@ -93,5 +89,27 @@ describe('Add expense form (REQ-001)', () => {
     await db.settings.put({ key: 'currency', value: 'EUR' });
     renderForm();
     expect(await screen.findByText('€')).toBeInTheDocument();
+  });
+
+  it('groups a VND amount as it is typed and saves the whole value', async () => {
+    await db.settings.put({ key: 'currency', value: 'VND' });
+    const user = userEvent.setup();
+    renderForm();
+    expect(await screen.findByText('đ')).toBeInTheDocument();
+    const amount = screen.getByLabelText('Amount');
+    await user.type(amount, '1000000');
+    expect(amount).toHaveValue('1.000.000');
+    await user.click(screen.getByRole('radio', { name: /Coffee/ }));
+    await user.click(screen.getByRole('button', { name: 'Save expense' }));
+    await waitFor(async () => expect(await expensesRepo.all()).toHaveLength(1));
+    expect((await expensesRepo.all())[0]).toMatchObject({ amountMinor: 100_000_000, category: 'coffee' });
+  });
+
+  it('groups thousands in USD while keeping the decimals', async () => {
+    const user = userEvent.setup();
+    renderForm();
+    const amount = screen.getByLabelText('Amount');
+    await user.type(amount, '1234567.5');
+    expect(amount).toHaveValue('1,234,567.5');
   });
 });

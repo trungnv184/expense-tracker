@@ -33,9 +33,9 @@ test.describe('Settings (REQ-012, REQ-013)', () => {
     await expect(page.getByRole('combobox', { name: 'Currency' })).toHaveValue('USD');
     await expect(page.getByTestId('currency-preview')).toHaveText('$12.50 · $1,261.20');
     await page.getByRole('combobox', { name: 'Currency' }).selectOption('VND');
-    await expect(page.getByTestId('currency-preview')).toHaveText(/13\s₫ · 1\.261\s₫/);
+    await expect(page.getByTestId('currency-preview')).toHaveText(/13\sđ · 1\.261\sđ/);
     await page.goto('./#/?month=2026-10');
-    await expect(page.getByTestId('month-total')).toHaveText(/^50\.000\s₫$/);
+    await expect(page.getByTestId('month-total')).toHaveText(/^50\.000\sđ$/);
     expect((await readExpenses(page))[0]).toMatchObject({ amountMinor: 5_000_000 });
   });
 

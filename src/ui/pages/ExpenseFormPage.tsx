@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getCategory, type CategoryId } from '../../domain/categories';
 import { formatDayHeading, formatMonth, monthOf, today } from '../../domain/dates';
-import { AMOUNT_ERROR_TEXT, formatAmount, minorToDecimal } from '../../domain/money';
+import { AMOUNT_ERROR_TEXT, amountInputFormat, formatAmount, minorToDecimal } from '../../domain/money';
 import { NOTE_MAX, validateExpense, type ExpenseErrors } from '../../domain/validation';
 import type { Expense } from '../../data/db';
 import { NotFoundError } from '../../data/errors';
@@ -163,7 +163,11 @@ function ExpenseForm({ existing }: { existing?: Expense }) {
           currency={currency}
           onChange={setAmount}
           error={errors.amount && AMOUNT_ERROR_TEXT[errors.amount]}
-          hint="Up to 2 decimals, no thousands separators."
+          hint={
+            amountInputFormat(currency).fractionDigits === 0
+              ? 'Whole amounts; separators are added as you type.'
+              : 'Up to 2 decimals; separators are added as you type.'
+          }
         />
 
         <CategoryPicker

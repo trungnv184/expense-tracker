@@ -40,7 +40,7 @@ export default defineConfig({
       manifest: {
         name: 'Ledger: expense tracker',
         short_name: 'Ledger',
-        description: 'Private expense tracker for food, education, charity, sport and living cost.',
+        description: 'Private expense tracker for everyday spending, budgets and recurring costs.',
         theme_color: '#f6f1e7',
         background_color: '#f6f1e7',
         display: 'standalone',

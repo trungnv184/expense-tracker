@@ -59,10 +59,10 @@ The user can create an expense with amount (required, > 0, up to 2 decimals), ca
 - Given the add form, when no category is selected, then saving is blocked and an inline error is shown.
 
 ### REQ-002: Fixed expense categories  ·  Must
-The app provides exactly five categories: Food, Education, Charity, Sport, Living cost. Each has a distinct colour and icon used consistently across the app.
+The app provides a fixed set of 17 categories: Food, Education, Charity, Sport, Living cost, Children, Travel, Coffee, Fuel, Electricity, Grab fee, Water, Internet & phone, Shopping, Health, Entertainment, Other. Each has a distinct colour and icon used consistently across the app.
 
 **Acceptance criteria**
-- Given the add form, when the user opens the category picker, then exactly the five categories are offered, in the order Food, Education, Charity, Sport, Living cost.
+- Given the add form, when the user opens the category picker, then exactly these categories are offered, in the order listed above.
 - Given any list, summary or chart, when a category is shown, then it uses the same colour and label everywhere.
 
 ### REQ-003: Edit an expense  ·  Must
@@ -87,10 +87,10 @@ The home screen shows the expenses of a selected month (default: current month),
 - Given a month with no expenses, when it is shown, then an empty state with an "Add expense" action is displayed.
 
 ### REQ-006: Monthly summary per category  ·  Must
-For the selected month the app shows the total spent and the total per category (all five categories, including those at 0).
+For the selected month the app shows the total spent and the total for each category the user spent on. Categories with no spending are left out so the list stays short; the budgets panel also shows categories that have a budget.
 
 **Acceptance criteria**
-- Given October expenses Food 10.00, Food 5.00 and Sport 20.00, when the user opens the October summary, then it shows Food 15.00, Sport 20.00, Education 0.00, Charity 0.00, Living cost 0.00 and total 35.00.
+- Given October expenses Food 10.00, Food 5.00 and Sport 20.00, when the user opens the October summary, then it shows Food 15.00, Sport 20.00 and total 35.00, and no other categories.
 
 ### REQ-007: Monthly spending chart  ·  Must
 The summary includes a chart showing each category's share of the month's spending.
@@ -144,7 +144,8 @@ The user picks one currency (ISO code, e.g. VND, USD, EUR) in settings; all amou
 
 **Acceptance criteria**
 - Given currency USD, when an expense of 12.5 is shown, then it displays as `$12.50`.
-- Given currency VND, when an expense of 50000 is shown, then it displays as `50.000 ₫` (locale formatting, no decimals).
+- Given currency VND, when an expense of 50000 is shown, then it displays as `50.000 đ` (locale formatting, no decimals).
+- Given currency VND, when the user types `1000000` into an amount field, then the field shows `1.000.000` with `đ` beside it while typing, and saves 1,000,000.
 - Given first launch, when no currency has been chosen, then a default (USD) is used and can be changed in settings.
 
 ### REQ-014: Local persistence  ·  Must

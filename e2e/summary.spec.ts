@@ -28,12 +28,13 @@ async function seed(page: Page, budgets: { category: string; amountMinor: number
 const legendAmount = (page: Page, cat: string) => page.locator(`.legend li[data-category="${cat}"] .num`).first();
 
 test.describe('Monthly summary (REQ-006, REQ-007, REQ-009)', () => {
-  test('shows the total and every category including zeros', async ({ page }) => {
+  test('shows the total and only the categories spent on', async ({ page }) => {
     await seed(page);
     await expect(page.getByTestId('summary-total')).toHaveText('$35.00');
     await expect(legendAmount(page, 'food')).toHaveText('$15.00');
     await expect(legendAmount(page, 'sport')).toHaveText('$20.00');
-    for (const cat of ['education', 'charity', 'living']) await expect(legendAmount(page, cat)).toHaveText('$0.00');
+    await expect(page.locator('.legend li')).toHaveCount(2);
+    await expect(page.locator('.budget')).toHaveCount(2);
   });
 
   test('donut segments are proportional to category totals', async ({ page }) => {
@@ -69,9 +70,14 @@ test.describe('Monthly summary (REQ-006, REQ-007, REQ-009)', () => {
     await expect(bar('sport')).toHaveAttribute('data-state', 'warn');
     await expect(bar('sport')).toContainText('$4.00 left');
     await expect(bar('sport')).toContainText('83%');
-    await expect(bar('education')).toHaveAttribute('data-state', 'none');
-    await expect(bar('education')).toContainText('No budget');
-    await expect(bar('education').getByRole('progressbar')).toHaveCount(0);
+    await expect(bar('charity')).toHaveAttribute('data-state', 'ok'); // budgeted, nothing spent: still shown
+    await expect(bar('education')).toHaveCount(0); // no budget, nothing spent: hidden
+
+    await seedStore(page, 'expenses', [row('l1', '2026-10-27', 'living', 700)]);
+    await page.reload();
+    await expect(bar('living')).toHaveAttribute('data-state', 'none'); // spent, no budget
+    await expect(bar('living')).toContainText('No budget');
+    await expect(bar('living').getByRole('progressbar')).toHaveCount(0);
 
     await seedStore(page, 'budgets', [{ category: 'sport', amountMinor: 1500 }]);
     await page.reload();

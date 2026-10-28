@@ -92,6 +92,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); outline
 .amount-input { display: flex; align-items: center; border: 1.5px solid var(--rule); border-radius: var(--radius); background: var(--card); padding-left: var(--s3); }
 .amount-input span { font: 600 26px var(--mono); color: var(--ink-3); }
 .amount-input input { border: 0; font: 600 30px var(--mono); min-height: 60px; background: transparent; box-shadow: none; }
+.amount-input.suffix { padding-left: 0; padding-right: var(--s3); }
+.amount-input.suffix input { text-align: right; }
 .amount-input:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(31, 58, 95, .2); }
 .field.invalid input, .field.invalid .amount-input, .field.invalid .cat-picker { border-color: var(--danger); }
 .error { display: none; color: var(--danger); font-size: 13px; font-weight: 600; }
@@ -104,13 +106,25 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); outline
   width: 28px; height: 28px; border-radius: 8px; font-size: 15px;
   background: color-mix(in srgb, var(--c) 14%, white); border: 1px solid color-mix(in srgb, var(--c) 35%, white);
 }
-.cat.food { --c: var(--c-food); }
-.cat.education { --c: var(--c-education); }
-.cat.charity { --c: var(--c-charity); }
-.cat.sport { --c: var(--c-sport); }
-.cat.living { --c: var(--c-living); }
+.cat.food, .cat-picker .food { --c: var(--c-food); }
+.cat.education, .cat-picker .education { --c: var(--c-education); }
+.cat.charity, .cat-picker .charity { --c: var(--c-charity); }
+.cat.sport, .cat-picker .sport { --c: var(--c-sport); }
+.cat.living, .cat-picker .living { --c: var(--c-living); }
+.cat.children, .cat-picker .children { --c: var(--c-children); }
+.cat.travel, .cat-picker .travel { --c: var(--c-travel); }
+.cat.coffee, .cat-picker .coffee { --c: var(--c-coffee); }
+.cat.fuel, .cat-picker .fuel { --c: var(--c-fuel); }
+.cat.electricity, .cat-picker .electricity { --c: var(--c-electricity); }
+.cat.grab, .cat-picker .grab { --c: var(--c-grab); }
+.cat.water, .cat-picker .water { --c: var(--c-water); }
+.cat.internet, .cat-picker .internet { --c: var(--c-internet); }
+.cat.shopping, .cat-picker .shopping { --c: var(--c-shopping); }
+.cat.health, .cat-picker .health { --c: var(--c-health); }
+.cat.entertainment, .cat-picker .entertainment { --c: var(--c-entertainment); }
+.cat.other, .cat-picker .other { --c: var(--c-other); }
 
-.cat-picker { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--s2); border: 1.5px solid transparent; border-radius: var(--radius); padding: 2px; margin: 0; }
+.cat-picker { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: var(--s2); border: 1.5px solid transparent; border-radius: var(--radius); padding: 2px; margin: 0; }
 .cat-picker label { cursor: pointer; }
 .cat-picker input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .cat-picker .tile {
@@ -121,8 +135,6 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); outline
 .cat-picker .tile b { font-size: 22px; line-height: 1; }
 .cat-picker input:checked + .tile { border-color: var(--c); box-shadow: inset 0 0 0 1.5px var(--c); color: var(--c); background: color-mix(in srgb, var(--c) 8%, white); }
 .cat-picker input:focus-visible + .tile { outline: 3px solid var(--accent); outline-offset: 2px; }
-.cat-picker .food { --c: var(--c-food); } .cat-picker .education { --c: var(--c-education); }
-.cat-picker .charity { --c: var(--c-charity); } .cat-picker .sport { --c: var(--c-sport); } .cat-picker .living { --c: var(--c-living); }
 
 .chips { display: flex; gap: var(--s2); overflow-x: auto; padding-bottom: var(--s1); margin-bottom: var(--s4); }
 .chip {

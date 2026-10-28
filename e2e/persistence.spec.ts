@@ -91,7 +91,7 @@ test('expenses, budgets, recurring items and currency survive a reload and a new
     await p.goto('./#/?month=2026-10');
     await expect(p.locator('.expense-list .row')).toHaveCount(6);
     await p.goto('./#/budgets');
-    await expect(p.getByLabel('Food monthly budget')).toHaveValue('300.00');
+    await expect(p.getByLabel('Food monthly budget')).toHaveValue('300,00'); // EUR input uses de-DE separators
     await p.goto('./#/recurring');
     await expect(p.getByRole('heading', { name: 'Gym' })).toBeVisible();
     await p.goto('./#/settings');

@@ -32,10 +32,13 @@ export function SummaryPage() {
   }
 
   const { totalMinor, byCategory } = summarizeMonth(expenses);
+  // Only categories with spending this month, so the long category list doesn't bury the real numbers.
+  const spent = CATEGORIES.filter((c) => byCategory[c.id] > 0);
+  const budgeted = CATEGORIES.filter((c) => byCategory[c.id] > 0 || budgets[c.id]);
   const chartLabel =
     totalMinor > 0
       ? `Share of ${formatMonth(month)} spending: ` +
-        CATEGORIES.filter((c) => byCategory[c.id] > 0)
+        spent
           .map((c) => `${c.label} ${pct(byCategory[c.id], totalMinor)}%`)
           .join(', ')
       : `No spending in ${formatMonth(month)}`;
@@ -70,20 +73,22 @@ export function SummaryPage() {
             </div>
           )}
 
-          <div className={totalMinor > 0 ? 'donut-wrap' : undefined}>
-            {totalMinor > 0 && <DonutChart byCategory={byCategory} totalMinor={totalMinor} label={chartLabel} />}
-            <ul className="legend" aria-label="Spending by category">
-              {CATEGORIES.map((c) => (
-                <li key={c.id} data-category={c.id}>
-                  <Link to={`/?month=${month}&cat=${c.id}`} style={{ textDecoration: 'none' }}>
-                    <CategoryBadge id={c.id} />
-                  </Link>
-                  <span className="num">{formatAmount(byCategory[c.id], currency)}</span>
-                  <span className="pct num">{totalMinor > 0 ? `${pct(byCategory[c.id], totalMinor)}%` : '—'}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {totalMinor > 0 && (
+            <div className="donut-wrap">
+              <DonutChart byCategory={byCategory} totalMinor={totalMinor} label={chartLabel} />
+              <ul className="legend" aria-label="Spending by category">
+                {spent.map((c) => (
+                  <li key={c.id} data-category={c.id}>
+                    <Link to={`/?month=${month}&cat=${c.id}`} style={{ textDecoration: 'none' }}>
+                      <CategoryBadge id={c.id} />
+                    </Link>
+                    <span className="num">{formatAmount(byCategory[c.id], currency)}</span>
+                    <span className="pct num">{pct(byCategory[c.id], totalMinor)}%</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </section>
 
         <section className="card card-pad" aria-labelledby="budget-h">
@@ -93,7 +98,12 @@ export function SummaryPage() {
               Edit budgets
             </Link>
           </div>
-          {CATEGORIES.map((c) => (
+          {budgeted.length === 0 && (
+            <p className="muted" style={{ margin: '12px 0 0' }}>
+              No spending or budgets this month yet.
+            </p>
+          )}
+          {budgeted.map((c) => (
             <BudgetBar
               key={c.id}
               category={c.id}
